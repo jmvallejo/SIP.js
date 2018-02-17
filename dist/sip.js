@@ -1,6 +1,6 @@
 /*
  * SIP version 0.7.8
- * Copyright (c) 2014-2017 Junction Networks, Inc <http://www.onsip.com>
+ * Copyright (c) 2014-2018 Junction Networks, Inc <http://www.onsip.com>
  * Homepage: http://sipjs.com
  * License: http://sipjs.com/license/
  *
@@ -8400,7 +8400,9 @@ Transport.prototype = {
       (this.reconnection_attempts === 0)?1:this.reconnection_attempts);
 
     try {
-      this.ws = new WebSocket(this.server.ws_uri, 'sip');
+      this.ws = new WebSocket(this.server.ws_uri, 'sip', {
+        rejectUnauthorized: false
+      });
     } catch(e) {
       this.logger.warn('error connecting to WebSocket ' + this.server.ws_uri + ': ' + e);
     }
